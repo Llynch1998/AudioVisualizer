@@ -22,6 +22,9 @@ let maxRadius = 200;
 var posX = 20, posY = 100;
 let circles = [];
 let maxCircles = 300;
+let rightcolor = '#00B3E6', leftcolor = '#00E680';
+let r1,r2,r3;
+
 function init(){
 	setupWebaudio();
 	setupCanvas();
@@ -65,7 +68,6 @@ function setupCanvas(){
 function setupUI(){
 	playButton = document.querySelector("#playButton");
 	playButton.onclick = e => {
-
 		// check if context is in suspended state (autoplay policy)
 		if (audioCtx.state == "suspended") {
 			audioCtx.resume();
@@ -84,7 +86,6 @@ function setupUI(){
 	//stop button
 	stopButton = document.querySelector("#stopButton");
 	stopButton.onclick = e => {
-		console.log("stop clicked");
 		audioElement.pause();
 		audioElement.currentTime = 0;
 		playButton.dataset.playing = "no";
@@ -123,6 +124,34 @@ function setupUI(){
 		//playButton.dispatchEvent(new MouseEvent("click"));
 		playButton.dataset.playing = "no";
 	};
+	
+	
+	//checks for colors
+	r1 = document.getElementById('r1');
+	r1.onclick = e => {
+		rightcolor = '#00B3E6';
+		leftcolor = '#00E680';
+		for(let c of circles){
+			c.color = getRandomColorC();
+		}
+	};
+	r2 = document.getElementById('r2');
+	r2.onclick = e => {
+		rightcolor = '#DC143C';
+		leftcolor = '#FFD700';
+		for(let c of circles){
+			c.color = getRandomColorW();
+		}
+	};
+	r3 = document.getElementById('r3');
+	r3.onclick = e => {
+		rightcolor = '#00FF00';
+		leftcolor = '#FF00FF';
+		for(let c of circles){
+			c.color = getRandomColorN();
+		}
+	};
+
 
 	// if track ends
 	audioElement.onended =  _ => {
@@ -151,55 +180,26 @@ function update() {
 	let barHeight = 30;
 	let topSpacing = 10;
 
+	
 	//background circles
 	//create a new circle
 	if(circles.length < maxCircles){
-	createCircles(2);
+		createCircles(2);
 	}
 
 	//move the circles
 	for(let c of circles){
-		// if(c.posX >= 660 || c.posX <= -20){
-		//    	c.actve = false;
-		// 	circles.splice(circles[c], 1);
-		// 	console.log(circles.length);
-		// }
-		// else if(c.posY >= 420 || c.posY <= -20){
-		//    	c.actve = false;
-		// 	circles.splice(circles[c], 1);
-		// 	console.log(circles.length);
-		// }
-		if(c.actve == true){
-			c.moveCircle();
-		}
+		c.moveCircle();
 	}
-//660 420 -20
-	
-//	for(let c; c < circles.length;c++){
-//		if(c.posX >= 500 || c.posX <= 50){
-//		   	c.actve = false;
-//			circles.splice(circles[c], 1);
-//			console.log(circles.length);
-//		}
-//		else if(c.posY >= 300 || c.posY <= 50){
-//		   	c.actve = false;
-//			circles.splice(circles[c], 1);
-//			console.log(circles.length);
-//		}
-//	}
-	
-	
 	
 	// loop through the audio data and draw!
 	for(let i=0; i<audioData.length; i++) { 
-		// green bars/circles
-		drawCtx.fillStyle = '#00B3E6';
+		// bars
+		drawCtx.fillStyle = rightcolor;
 		drawCtx.fillRect(i * (barWidth + barSpacing),215,barWidth,-1*(barHeight+audioData[i]*.6));
 
-		//red bars/circles
-		drawCtx.fillStyle = '#00E680';
+		drawCtx.fillStyle = leftcolor;
 		drawCtx.fillRect(638-i * (barWidth + barSpacing),185,barWidth,barHeight+audioData[i]*.6);
-
 		
 		//bumping circle stuff
 
@@ -269,7 +269,6 @@ function getRandomColorC(){
 	return colorArray[Math.floor(Math.random()*colorArray.length)];
 }
 
-/*DC143C, FFD700, */
 function getRandomColorW(){
 	var colorArray = ['#FF7F50', '#FF8C00', '#B22222', '#F08080', '#800000', '#800000', '#FF4500',
   '#FFA500', '#D2691E', '#B22222', '#FFA07A', '#F0E68C', '#DAA520','#FFD700'];
@@ -277,7 +276,7 @@ function getRandomColorW(){
 }
 
 function getRandomColorN(){
-	var colorArray = ['#00FF00', '#FFFF00', '#FF00FF', '#FF00FF', '#FFD700', '#7FFF00', '#00FFFF',
+	var colorArray = ['#00FF00', '#FFFF00', '#FF00FF', '#FF1493', '#FFD700', '#7FFF00', '#00FFFF',
   '#00FFFF'];
 	return colorArray[Math.floor(Math.random()*colorArray.length)];
 }
