@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Web Audio Viz - Start</title>
+</head>
+<body>
+	<link rel="stylesheet" href="css/stylesheet.css">
+	<script src="js/classes.js"></script>
+    <script src="js/main.js"></script>
+	
+	<canvas width="640" height="400"></canvas>
+	<div id="controls">
+		<audio></audio>
+		<section>
+			<label>Track: 
+				<select id="trackSelect">
+					<option value="media/Stessie - Close To You.wav" selected>Close to You</option>
+					<option value="media/Hyper Potions  Nokae - Expedition.mp3">Expedition</option>
+					<option value="media/Shibuya by OHEY.mp3">Shibuya</option>
+				</select>
+			</label>
+			<button id="playButton" data-playing="no"></button>
+			<button id="stopButton">Stop</button>
+			<button id="fsButton">Full Screen</button>
+		</section>
+		<section>
+			Volume: <input type="range" id="volumeSlider" min="0" max="2" value="1" step="0.01" class="slider" >
+			<span id="volumeLabel">???</span>
+			Radius: <input type="range" id="radiusSlider" min="0" max="2" value="1" step="0.01" class="slider" >
+			<span id="radiusLabel">???</span>
+		</section>
+	</div>	
+</body>
+</html>

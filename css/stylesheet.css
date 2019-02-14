@@ -1,0 +1,82 @@
+body {
+	background: #eeeeee;
+	font-family: tahoma, verdana, sans serif;
+}
+
+canvas {
+	margin-left:10px;
+	margin-top:10px;
+	box-shadow: 4px 4px 8px rgba(0,0,0,0.5);
+	background: black;
+}
+
+#controls{
+	margin-left:10px;
+	margin-top:10px;
+}
+
+section{
+	margin-bottom:1em;
+}
+
+button[data-playing="yes"]:after{
+	content: "Pause";
+}
+
+button[data-playing="no"]:after{
+	content: "Play";
+}
+
+button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+button:hover {background-color: #3e8e41}
+
+button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+
+.slider {
+  -webkit-appearance: none;
+  width: 15em;
+  height: 15px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
