@@ -1,2 +1,2 @@
 # AudioVisualizer
-An audio visualizer worked on with @Peakz1025 
+An audio visualizer worked on with @Peekz1025 
