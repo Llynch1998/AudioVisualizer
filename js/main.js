@@ -21,7 +21,7 @@ let audioData = new Uint8Array(NUM_SAMPLES/2);
 let maxRadius = 200;
 var posX = 20, posY = 100;
 let circles = [];
-
+let maxCircles = 300;
 function init(){
 	setupWebaudio();
 	setupCanvas();
@@ -106,6 +106,16 @@ function setupUI(){
 	};
 	radiusSlider.dispatchEvent(new InputEvent("input"));
 
+	let circleNumSlider = document.querySelector("#circleNumSlider");
+	circleNumSlider.oninput = e => {
+		if(maxCircles > e.target.value){
+			circles.pop();
+			console.log("popping");
+		}
+		maxCircles = e.target.value;
+		circleNumLabel.innerHTML = e.target.value;
+	};
+	circleNumSlider.dispatchEvent(new InputEvent("input"));
 
 	document.querySelector("#trackSelect").onchange = e =>{
 		audioElement.src = e.target.value;
@@ -143,7 +153,7 @@ function update() {
 
 	//background circles
 	//create a new circle
-	if(circles.length < 400){
+	if(circles.length < maxCircles){
 	createCircles(2);
 	}
 
