@@ -143,20 +143,22 @@ function update() {
 
 	//background circles
 	//create a new circle
+	if(circles.length < 400){
 	createCircles(2);
+	}
 
 	//move the circles
 	for(let c of circles){
-		if(c.posX >= 660 || c.posX <= -20){
-		   	c.actve = false;
-			circles.splice(circles[c], 1);
-			console.log(circles.length);
-		}
-		else if(c.posY >= 420 || c.posY <= -20){
-		   	c.actve = false;
-			circles.splice(circles[c], 1);
-			console.log(circles.length);
-		}
+		// if(c.posX >= 660 || c.posX <= -20){
+		//    	c.actve = false;
+		// 	circles.splice(circles[c], 1);
+		// 	console.log(circles.length);
+		// }
+		// else if(c.posY >= 420 || c.posY <= -20){
+		//    	c.actve = false;
+		// 	circles.splice(circles[c], 1);
+		// 	console.log(circles.length);
+		// }
 		if(c.actve == true){
 			c.moveCircle();
 		}
