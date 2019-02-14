@@ -240,7 +240,7 @@ function requestFullscreen(element) {
 //craetes circles based on number passed in
 function createCircles(numCircles){
     for(let i=0; i<numCircles; i++){
-        let c = new Circle(getRandomColor());
+        let c = new Circle(getRandomColorC());
         circles.push(c);
     }
 }
@@ -251,8 +251,21 @@ function clearCircles(){
     }
 }
 
-function getRandomColor(){
-	var colorArray = ['#00B3E6', '#3366E6', '#99FF99', '#6680B3', '#33FFCC', '#4DB3FF', '#1AB399',
+function getRandomColorC(){
+	var colorArray = ['#00B3E6', '#3366E6', '#99FF99', '#33FFCC', '#4DB3FF', '#1AB399',
   '#00E680', '#66E64D', '#4D80CC', '#4DB380', '#99E6E6', '#6666FF'];
+	return colorArray[Math.floor(Math.random()*colorArray.length)];
+}
+
+/*DC143C, FFD700, */
+function getRandomColorW(){
+	var colorArray = ['#FF7F50', '#FF8C00', '#B22222', '#F08080', '#800000', '#800000', '#FF4500',
+  '#FFA500', '#D2691E', '#B22222', '#FFA07A', '#F0E68C', '#DAA520','#FFD700'];
+	return colorArray[Math.floor(Math.random()*colorArray.length)];
+}
+
+function getRandomColorN(){
+	var colorArray = ['#00FF00', '#FFFF00', '#FF00FF', '#FF00FF', '#FFD700', '#7FFF00', '#00FFFF',
+  '#00FFFF'];
 	return colorArray[Math.floor(Math.random()*colorArray.length)];
 }
