@@ -1,19 +1,27 @@
 body {
 	background: #1a1a1a;
 	font-family: 'Merienda One', cursive;
-	color: white;
+  color: white;
+  height: 700px;
+  display: grid;
+  grid-template-rows: 30em 1fr;
+  grid-template-columns: 1fr 30em;
+  grid-template-areas: 
+  "controls canvas"
+  "controls canvas";
 }
 
 canvas {
-	//margin-top: 11em;
-	margin-left: 48%;
+	
+	margin-left: 50px;
 	/* This centers our sketch horizontally. */
-	justify-content: center;
+	justify-content:left;
 	/* This centers our sketch vertically. */
 	align-items: center;
 	box-shadow: 4px 4px 8px rgba(0,0,0,0.5);
 	background: black;
-	border-radius: 15px;
+  border-radius: 15px;
+  grid-area: canvas;
 }
 
 #controls{
@@ -21,7 +29,8 @@ canvas {
 	//margin-top:5%;
 	background-color: #353535;
 	border-radius: 15px;
-	width: 30em;
+  width: 25em;
+  grid-area: controls;
 }
 
 section{
