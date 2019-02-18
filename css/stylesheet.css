@@ -5,15 +5,15 @@ body {
   height: 700px;
   display: grid;
   grid-template-rows: 30em 1fr;
-  grid-template-columns: 1fr 30em;
+  grid-template-columns: 30em 1fr;
   grid-template-areas: 
   "controls canvas"
-  "controls canvas";
+  "controls .";
 }
 
 canvas {
 	
-	margin-left: 50px;
+	margin-left: 10px;
 	/* This centers our sketch horizontally. */
 	justify-content:left;
 	/* This centers our sketch vertically. */
