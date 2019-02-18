@@ -25,6 +25,9 @@ let maxCircles = 300;
 let rightcolor = '#00B3E6', leftcolor = '#00E680';
 let circolor1, circolor2;
 let r1,r2,r3;
+let bass = false;
+let bassFilter;
+
 
 function init(){
 	setupWebaudio();
@@ -37,6 +40,10 @@ function setupWebaudio(){
 	// 1 - The || is because WebAudio has not been standardized across browsers yet
 	const AudioContext = window.AudioContext || window.webkitAudioContext;
 	audioCtx = new AudioContext();
+
+	
+	bassFilter  = audioCtx.createBiquadFilter();
+	bassFilter.type = "lowshelf";
 
 	// 2 - get a reference to the <audio> element on the page
 	audioElement = document.querySelector("audio");
@@ -56,7 +63,8 @@ function setupWebaudio(){
 	gainNode.gain.value = 1;
 
 	// 6 - connect the nodes - we now have an audio graph
-	sourceNode.connect(analyserNode);
+	sourceNode.connect(bassFilter);
+	bassFilter.connect(analyserNode);
 	analyserNode.connect(gainNode);
 	gainNode.connect(audioCtx.destination);
 }
@@ -165,6 +173,13 @@ function setupUI(){
 	document.querySelector("#fsButton").onclick = _ =>{
 		requestFullscreen(canvasElement);
 	};
+
+	document.querySelector("#bassCB").checked = bass;
+	document.querySelector("#bassCB").onchange = e => {
+		bass = e.target.checked;
+		bassToggle();
+	};
+	bassToggle();
 
 }
 
@@ -290,4 +305,14 @@ function getRandomColorW(){
 function getRandomColorN(){
 	var colorArray = ['#00FF00', '#7FFF00', '#FF00FF', '#FF1493', '#FFD700', '#FFFF00','#00FFFF','#00FFFF'];
 	return colorArray[Math.floor(Math.random()*colorArray.length)];
+}
+
+function bassToggle(){
+	if(bass){
+		bassFilter.frequency.setValueAtTime(1000,audioCtx.currentTime);
+		bassFilter.gain.setValueAtTime(15,audioCtx.currentTime);
+	}
+	else{
+		bassFilter.gain.setValueAtTime(0, audioCtx.currentTime);
+	}
 }
