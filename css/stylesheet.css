@@ -1,22 +1,36 @@
 body {
-	background: #eeeeee;
-	font-family: tahoma, verdana, sans serif;
+	background: #1a1a1a;
+	font-family: 'Merienda One', cursive;
+	color: white;
 }
 
 canvas {
-	margin-left:10px;
-	margin-top:10px;
+	//margin-top: 11em;
+	margin-left: 48%;
+	/* This centers our sketch horizontally. */
+	justify-content: center;
+	/* This centers our sketch vertically. */
+	align-items: center;
 	box-shadow: 4px 4px 8px rgba(0,0,0,0.5);
 	background: black;
+	border-radius: 15px;
 }
 
 #controls{
-	margin-left:10px;
-	margin-top:10px;
+	margin-left:5%;
+	//margin-top:5%;
+	background-color: #353535;
+	border-radius: 15px;
+	width: 30em;
 }
 
 section{
-	margin-bottom:1em;
+	margin: 1em;
+}
+.name{
+	font-size: 2em;
+	text-align: center;
+	margin-left: 22%;
 }
 
 button[data-playing="yes"]:after{
@@ -28,28 +42,28 @@ button[data-playing="no"]:after{
 }
 
 button {
-  display: inline-block;
-  padding: 10px 20px;
-  font-size: 1.2em;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  outline: none;
-  color: #fff;
-  background-color: #4CAF50;
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 9px #999;
+	display: inline-block;
+	padding: 10px 20px;
+	font-family: 'Merienda One', cursive;
+	font-size: 1.2em;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	outline: none;
+	color: #fff;
+	background-color: #929292;
+	border: none;
+	border-radius: 15px;
+	box-shadow: white;
 }
 
-button:hover {background-color: #3e8e41}
+button:hover {background-color: #1a1a1a}
 
 button:active {
-  background-color: #3e8e41;
-  box-shadow: 0 5px #666;
+  background-color: #1a1a1a;
+  box-shadow: white;
   transform: translateY(4px);
 }
-
 
 .slider {
   -webkit-appearance: none;
@@ -68,7 +82,7 @@ button:active {
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  background: #4CAF50;
+  background: #1a1a1a;
   cursor: pointer;
 }
 
@@ -76,7 +90,7 @@ button:active {
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  background: #4CAF50;
+  background: #1a1a1a;
   cursor: pointer;
 }
 
@@ -120,7 +134,7 @@ button:active {
 
 /* When the checkbox is checked, add a blue background */
 .container1 input:checked ~ .checkmark1 {
-  background-color: #2196F3;
+  background-color: #1a1a1a;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -147,7 +161,6 @@ button:active {
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
-
 
 /* The container */
 .container2 {
@@ -213,5 +226,7 @@ button:active {
 	background: white;
 }
 
-
-
+.flex-container{
+	display: flex;
+	flex-direction: column;
+}

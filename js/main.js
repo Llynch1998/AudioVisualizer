@@ -23,6 +23,7 @@ var posX = 20, posY = 100;
 let circles = [];
 let maxCircles = 300;
 let rightcolor = '#00B3E6', leftcolor = '#00E680';
+let circolor1, circolor2;
 let r1,r2,r3;
 
 function init(){
@@ -107,6 +108,7 @@ function setupUI(){
 	};
 	radiusSlider.dispatchEvent(new InputEvent("input"));
 
+	//handles number of background circles
 	let circleNumSlider = document.querySelector("#circleNumSlider");
 	circleNumSlider.oninput = e => {
 		if(maxCircles > e.target.value){
@@ -202,28 +204,35 @@ function update() {
 		drawCtx.fillRect(638-i * (barWidth + barSpacing),185,barWidth,barHeight+audioData[i]*.6);
 		
 		//bumping circle stuff
-
-		//red-ish medium circles
 		let percent = audioData[i]/255;
+		
+		//checks which colors are selected
+		if(document.getElementById('r1').checked){
+			circolor1 = makeColor(77,128,204,.34-percent/3.0);
+			circolor2 = makeColor(77,179,128,.10-percent/10.0);
+		}
+		else if(document.getElementById('r2').checked){
+			circolor1 = makeColor(178,34,34,.34-percent/3.0);
+			circolor2 = makeColor(255,145,0,.10-percent/10.0);
+		}
+		else if(document.getElementById('r3').checked){
+			circolor1 = makeColor(0,255,255,.34-percent/3.0);
+			circolor2 = makeColor(255,215,0,.10-percent/10.0);
+		}
+		
+		//medium circles
 		maxRadius = maxRadius;
 		let circleradius = percent * maxRadius;
 		drawCtx.beginPath();
-		drawCtx.fillStyle = makeColor(60,179,113,.34-percent/3.0);
+		drawCtx.fillStyle = circolor1;
 		drawCtx.arc(canvasElement.width/2, canvasElement.height/2, circleradius, 0,2*Math.PI, false);
 		drawCtx.fill();
 		drawCtx.closePath();
 
-		//blue circles, bigger more transparent
+		//bigger
 		drawCtx.beginPath();
-		drawCtx.fillStyle = makeColor(0,128,128,.10-percent/10.0);
+		drawCtx.fillStyle = circolor2;
 		drawCtx.arc(canvasElement.width/2, canvasElement.height/2, circleradius*1.5, 0,2*Math.PI, false);
-		drawCtx.fill();
-		drawCtx.closePath();
-
-		//yellow circles, smaller
-		drawCtx.beginPath();
-		drawCtx.fillStyle = makeColor(72,208,204,.5-percent/5.0);
-		drawCtx.arc(canvasElement.width/2, canvasElement.height/2, circleradius*.50, 0,2*Math.PI, false);
 		drawCtx.fill();
 		drawCtx.closePath();
 	}
@@ -270,13 +279,12 @@ function getRandomColorC(){
 }
 
 function getRandomColorW(){
-	var colorArray = ['#FF7F50', '#FF8C00', '#B22222', '#F08080', '#800000', '#800000', '#FF4500',
-  '#FFA500', '#D2691E', '#B22222', '#FFA07A', '#F0E68C', '#DAA520','#FFD700'];
+	var colorArray = ['#FF7F50', '#FF8C00', '#B22222', '#F08080', '#800000', '#FF4500',
+  '#FFA500', '#D2691E', '#FFA07A', '#F0E68C', '#DAA520','#FFD700'];
 	return colorArray[Math.floor(Math.random()*colorArray.length)];
 }
 
 function getRandomColorN(){
-	var colorArray = ['#00FF00', '#FFFF00', '#FF00FF', '#FF1493', '#FFD700', '#7FFF00', '#00FFFF',
-  '#00FFFF'];
+	var colorArray = ['#00FF00', '#7FFF00', '#FF00FF', '#FF1493', '#FFD700', '#FFFF00','#00FFFF','#00FFFF'];
 	return colorArray[Math.floor(Math.random()*colorArray.length)];
 }

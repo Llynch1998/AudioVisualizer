@@ -5,13 +5,22 @@
 	<title>Web Audio Viz - Start</title>
 </head>
 <body>
+	<link href="https://fonts.googleapis.com/css?family=Merienda+One" rel="stylesheet">
 	<link rel="stylesheet" href="css/stylesheet.css">
 	<script src="js/classes.js"></script>
     <script src="js/main.js"></script>
 	
-	<canvas width="640" height="400"></canvas>
-	<div id="controls">
+	<canvas class="flex-container" width="640" height="400"></canvas>
+	<div class="flex-container" id="controls">
 		<audio></audio>
+		<section>
+			<span class = "name">Audio Visualizer</span>
+		</section>
+		<section>
+			<button id="playButton" data-playing="no"></button>
+			<button id="stopButton">Stop</button>
+			<button id="fsButton">Full Screen</button>
+		</section>
 		<section>
 			<label>Track: 
 				<select id="trackSelect">
@@ -20,21 +29,22 @@
 					<option value="media/Shibuya by OHEY.mp3">Shibuya</option>
 				</select>
 			</label>
-			<button id="playButton" data-playing="no"></button>
-			<button id="stopButton">Stop</button>
-			<button id="fsButton">Full Screen</button>
 		</section>
 		<section>
 			Volume: <input type="range" id="volumeSlider" min="0" max="2" value="1" step="0.01" class="slider" >
 			<span id="volumeLabel">???</span>
-			Radius: <input type="range" id="radiusSlider" min="0" max="2" value="1" step="0.01" class="slider" >
-			<span id="radiusLabel">???</span>
-			MaxCircles: <input type="range" id="circleNumSlider" min="100" max="800" value="100" step="1" class="slider" >
+		</section>
+		<section>
+			Max Circles: <input type="range" id="circleNumSlider" min="100" max="800" value="100" step="1" class="slider" >
 			<span id="circleNumLabel">???</span>
 		</section>
 		<section>
+			Radius: <input type="range" id="radiusSlider" min="0" max="2" value="1" step="0.01" class="slider" >
+			<span id="radiusLabel">???</span>
+		</section>
+		<section>
 			<label class="container1">Checkbox 1
-				<input type="checkbox" checked="checked">
+				<input type="checkbox">
 				<span class="checkmark1"></span>
 			</label>
 			<label class="container1">Checkbox 2
@@ -48,7 +58,7 @@
 		</section>
 		<section>
 			<label class="container2">Cool Colors
-				<input type="radio" checked="checked" name="radio" id="r1">
+				<input  checked="checked" type="radio" name="radio" id="r1">
 				<span class="checkmark2"></span>
 			</label>
 			<label class="container2">Warm Colors
