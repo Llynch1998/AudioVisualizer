@@ -112,8 +112,10 @@ function setupUI(){
 	let circleNumSlider = document.querySelector("#circleNumSlider");
 	circleNumSlider.oninput = e => {
 		if(maxCircles > e.target.value){
-			circles.pop();
-			console.log("popping");
+			for(let i = 0; i <= (maxCircles - e.target.value); i++){
+				circles.pop();
+			}
+			//console.log("popping");
 		}
 		maxCircles = e.target.value;
 		circleNumLabel.innerHTML = e.target.value;
@@ -169,7 +171,8 @@ function setupUI(){
 function update() { 
 	// this schedules a call to the update() method in 1/60 seconds
 	requestAnimationFrame(update);
-
+	// console.log("max circles "  + maxCircles);
+	// console.log(circles.length)
 	// populate the audioData with the frequency data
 	// notice these arrays are passed "by reference" 
 	analyserNode.getByteFrequencyData(audioData);
