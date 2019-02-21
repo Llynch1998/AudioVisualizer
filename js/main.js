@@ -195,9 +195,9 @@ function update() {
 
 	// DRAW!
 	drawCtx.clearRect(0,0,800,600);  
-	let barWidth = 1.5;
+	let barWidth = 30;
 	let barSpacing = 1;
-	let barHeight = 30;
+	let barHeight = 2.2;
 	let topSpacing = 10;
 
 	
@@ -213,13 +213,13 @@ function update() {
 	}
 	
 	// loop through the audio data and draw!
-	for(let i=0; i<audioData.length; i++) { 
+	for(let i=0; i<audioData.length/2; i++) { 
 		// bars
 		drawCtx.fillStyle = rightcolor;
-		drawCtx.fillRect(i * (barWidth + barSpacing),215,barWidth,-1*(barHeight+audioData[i]*.6));
+		drawCtx.fillRect(canvasElement.width/2,i * (barHeight + barSpacing),-1*(barWidth+audioData[i]*.6),barHeight);
 
 		drawCtx.fillStyle = leftcolor;
-		drawCtx.fillRect(638-i * (barWidth + barSpacing),185,barWidth,barHeight+audioData[i]*.6);
+		drawCtx.fillRect(canvasElement.width/2,canvasElement.height-i * (barHeight + barSpacing),1*(barWidth+audioData[audioData.length/2+i]*.6),barHeight);
 		
 		//bumping circle stuff
 		let percent = audioData[i]/255;
