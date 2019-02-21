@@ -213,14 +213,37 @@ function update() {
 	}
 	
 	// loop through the audio data and draw!
-	for(let i=0; i<audioData.length/2; i++) { 
+	for(let i=0; i<audioData.length; i++) { 
 		// bars
-		drawCtx.fillStyle = rightcolor;
-		drawCtx.fillRect(canvasElement.width/2,i * (barHeight + barSpacing),-1*(barWidth+audioData[i]*.6),barHeight);
-
-		drawCtx.fillStyle = leftcolor;
-		drawCtx.fillRect(canvasElement.width/2,canvasElement.height-i * (barHeight + barSpacing),1*(barWidth+audioData[audioData.length/2+i]*.6),barHeight);
 		
+		drawCtx.save();
+		drawCtx.translate(canvasElement.width/2,canvasElement.height/2);
+		//drawCtx.rotate(60);
+		drawCtx.lineWidth = 2;
+		drawCtx.fillStyle = rightcolor;
+		drawCtx.strokeStyle =rightcolor;
+		//drawCtx.fillRect(canvasElement.width/2,i * (barHeight + barSpacing),-1*(barWidth+audioData[i]*.6),barHeight);
+		drawCtx.beginPath();
+		drawCtx.arc(0,0,(i*1.5)+15,-0.00174533,audioData[i]*.009,false);
+		//drawCtx.arc(canvasElement.width/2,canvasElement.height/2,75,1,audioData[i]/100,true);
+		//drawCtx.closePath();
+		drawCtx.stroke();
+		drawCtx.restore();
+		drawCtx.save();
+		drawCtx.translate(canvasElement.width/2,canvasElement.height/2);
+		drawCtx.scale(-1,1);
+		drawCtx.fillStyle = leftcolor;
+		//drawCtx.fillRect(canvasElement.width/2,canvasElement.height-i * (barHeight + barSpacing),1*(barWidth+audioData[audioData.length/2+i]*.6),barHeight);
+		drawCtx.strokeStyle =leftcolor;
+		//drawCtx.fillRect(canvasElement.width/2,i * (barHeight + barSpacing),-1*(barWidth+audioData[i]*.6),barHeight);
+		drawCtx.beginPath();
+		drawCtx.arc(0,0,(i*1.5)+15,0.00174533,-audioData[i]*.009,true);
+		//drawCtx.arc(canvasElement.width/2,canvasElement.height/2,75,1,audioData[i]/100,true);
+		//drawCtx.closePath();
+		drawCtx.stroke();
+		drawCtx.restore();
+
+
 		//bumping circle stuff
 		let percent = audioData[i]/255;
 		
@@ -238,21 +261,21 @@ function update() {
 			circolor2 = makeColor(255,215,0,.10-percent/10.0);
 		}
 		
-		//medium circles
-		maxRadius = maxRadius;
-		let circleradius = percent * maxRadius;
-		drawCtx.beginPath();
-		drawCtx.fillStyle = circolor1;
-		drawCtx.arc(canvasElement.width/2, canvasElement.height/2, circleradius, 0,2*Math.PI, false);
-		drawCtx.fill();
-		drawCtx.closePath();
+		// //medium circles
+		// maxRadius = maxRadius;
+		// let circleradius = percent * maxRadius;
+		// drawCtx.beginPath();
+		// drawCtx.fillStyle = circolor1;
+		// drawCtx.arc(canvasElement.width/2, canvasElement.height/2, circleradius, 0,2*Math.PI, false);
+		// drawCtx.fill();
+		// drawCtx.closePath();
 
-		//bigger
-		drawCtx.beginPath();
-		drawCtx.fillStyle = circolor2;
-		drawCtx.arc(canvasElement.width/2, canvasElement.height/2, circleradius*1.5, 0,2*Math.PI, false);
-		drawCtx.fill();
-		drawCtx.closePath();
+		// //bigger
+		// drawCtx.beginPath();
+		// drawCtx.fillStyle = circolor2;
+		// drawCtx.arc(canvasElement.width/2, canvasElement.height/2, circleradius*1.5, 0,2*Math.PI, false);
+		// drawCtx.fill();
+		// drawCtx.closePath();
 	}
 	
 }
