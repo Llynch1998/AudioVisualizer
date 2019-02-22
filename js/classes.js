@@ -1,6 +1,6 @@
 //circles function with move, relfect, and follow player functions
 class Circle{
-    constructor(color = 0xFF0000){
+    constructor(color = 0xFF0000,alpha){
 		this.posX = 320;
 		this.posY = 200;
 		this.originX = this.posX;
@@ -10,6 +10,7 @@ class Circle{
 		this.incY = Math.floor(Math.random() * 10) - 5;
 		this.color = color;
 		this.actve = true;
+		this.alpha = alpha;
     }
 	
 	moveCircle() {
@@ -23,11 +24,14 @@ class Circle{
 			this.posX = this.originX;
 			this.posY = this.originY;
 		}
+		drawCtx.save();
+		drawCtx.globalAlpha = this.alpha;
 		drawCtx.beginPath();
 		drawCtx.fillStyle = this.color;
 		drawCtx.arc(this.posX, this.posY, this.radius, 0, Math.PI*2, true); 
 		drawCtx.closePath();
 		drawCtx.fill();
+		drawCtx.restore();
 	}
 
 }
