@@ -104,12 +104,12 @@ function setupUI(){
 	//volume slider
 	let volumeSlider = document.querySelector("#volumeSlider");
 	volumeSlider.oninput = e => {
-		gainNode.gain.value = e.target.value;
+		gainNode.gain.value = (e.target.value/6);
 		volumeLabel.innerHTML = Math.round((e.target.value/2 * 100));
 	};
 	volumeSlider.dispatchEvent(new InputEvent("input"));
 
-	//radius slider
+	//spin slider
 	let spinSlider = document.querySelector("#spinSlider");
 	spinSlider.oninput = e => {														
 		spinSpeed = e.target.value * 0.0001;
@@ -117,7 +117,7 @@ function setupUI(){
 	};																											
 	spinSlider.dispatchEvent(new InputEvent("input"));			
 
-	//handles number of background circles
+	//background circles slider
 	let circleNumSlider = document.querySelector("#circleNumSlider");
 	circleNumSlider.oninput = e => {
 		if(maxCircles > e.target.value){
@@ -133,8 +133,6 @@ function setupUI(){
 
 	document.querySelector("#trackSelect").onchange = e =>{
 		audioElement.src = e.target.value;
-		// pause the current track if it is playing
-		//playButton.dispatchEvent(new MouseEvent("click"));
 		playButton.dataset.playing = "no";
 	};
 	
@@ -222,8 +220,6 @@ function update() {
 	
 	// loop through the audio data and draw!
 	for(let i=0; i<audioData.length; i++) { 
-		// bars
-		
 		drawCtx.save();
 		drawCtx.translate(canvasElement.width/2,canvasElement.height/2);
 		drawCtx.rotate(loopCount);//making this rotate i gives it a cool result
@@ -281,22 +277,6 @@ function update() {
 			circolor1 = makeColor(0,255,255,.34-percent/3.0);
 			circolor2 = makeColor(255,215,0,.10-percent/10.0);
 		}
-		
-		// //medium circles
-		// maxRadius = maxRadius;
-		// let circleradius = percent * maxRadius;
-		// drawCtx.beginPath();
-		// drawCtx.fillStyle = circolor1;
-		// drawCtx.arc(canvasElement.width/2, canvasElement.height/2, circleradius, 0,2*Math.PI, false);
-		// drawCtx.fill();
-		// drawCtx.closePath();
-
-		// //bigger
-		// drawCtx.beginPath();
-		// drawCtx.fillStyle = circolor2;
-		// drawCtx.arc(canvasElement.width/2, canvasElement.height/2, circleradius*1.5, 0,2*Math.PI, false);
-		// drawCtx.fill();
-		// drawCtx.closePath();
 		loopCount += spinSpeed;
 	}
 	
