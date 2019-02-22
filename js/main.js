@@ -27,6 +27,7 @@ let circolor1, circolor2;
 let r1,r2,r3;
 let bass = false;
 let bassFilter;
+let inverseCirc = false;
 
 
 function init(){
@@ -180,6 +181,10 @@ function setupUI(){
 		bassToggle();
 	};
 	bassToggle();
+	document.querySelector("#inverseCirc").checked = inverseCirc;
+	document.querySelector("#inverseCirc").onchange = e => {
+		inverseCirc = e.target.checked;
+	};
 
 }
 
@@ -227,7 +232,12 @@ function update() {
 		drawCtx.strokeStyle =rightcolor;
 		//drawCtx.fillRect(canvasElement.width/2,i * (barHeight + barSpacing),-1*(barWidth+audioData[i]*.6),barHeight);
 		drawCtx.beginPath();
-		drawCtx.arc(0,0,(i*1.5)+10,0,audioData[i]*.009,false);//swap the circles true and false value and switch the starter angle from positive to negative for cool pulsing effect drawCtx.arc(0,0,(i*1.5)+50,0.00174533,audioData[i]*.0009,true);
+		if(inverseCirc){
+			drawCtx.arc(0,0,(i*1.5)+50,0.00174533,audioData[i]*.0009,true);
+		}
+		else{
+			drawCtx.arc(0,0,(i*1.5)+10,0,audioData[i]*.009,false);//swap the circles true and false value and switch the starter angle from positive to negative for cool pulsing effect drawCtx.arc(0,0,(i*1.5)+50,0.00174533,audioData[i]*.0009,true);
+		}
 		//drawCtx.arc(canvasElement.width/2,canvasElement.height/2,75,1,audioData[i]/100,true);
 		//drawCtx.closePath();
 		drawCtx.stroke();
@@ -241,7 +251,14 @@ function update() {
 		drawCtx.strokeStyle =leftcolor;
 		//drawCtx.fillRect(canvasElement.width/2,i * (barHeight + barSpacing),-1*(barWidth+audioData[i]*.6),barHeight);
 		drawCtx.beginPath();
-		drawCtx.arc(0,0,(i*1.5)+10,0,-audioData[i]*.009,true);
+		
+		if(inverseCirc){
+			drawCtx.arc(0,0,(i*1.5)+10,0,-audioData[i]*.009,false);
+		}
+		else{
+			drawCtx.arc(0,0,(i*1.5)+10,0,-audioData[i]*.009,true);
+		}
+		
 		//drawCtx.arc(canvasElement.width/2,canvasElement.height/2,75,1,audioData[i]/100,true);
 		//drawCtx.closePath();
 		drawCtx.stroke();
