@@ -109,12 +109,12 @@ function setupUI(){
 	volumeSlider.dispatchEvent(new InputEvent("input"));
 
 	//radius slider
-	let spinSlider = document.querySelector("#spinSlider");//\
-	spinSlider.oninput = e => {														// \
-		spinSpeed = e.target.value * 0.0001;														//  \ This Does
-		spinLabel.innerHTML = Math.round((e.target.value));		//  / Not Work
-	};																											// /
-	spinSlider.dispatchEvent(new InputEvent("input"));			///
+	let spinSlider = document.querySelector("#spinSlider");
+	spinSlider.oninput = e => {														
+		spinSpeed = e.target.value * 0.0001;
+		spinLabel.innerHTML = e.target.value;
+	};																											
+	spinSlider.dispatchEvent(new InputEvent("input"));			
 
 	//handles number of background circles
 	let circleNumSlider = document.querySelector("#circleNumSlider");
@@ -207,7 +207,7 @@ function update() {
 	//background circles
 	//create a new circle
 	if(circles.length < maxCircles){
-		createCircles(2);
+		createCircles(1);
 	}
 
 	//move the circles
