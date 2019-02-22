@@ -109,12 +109,12 @@ function setupUI(){
 	volumeSlider.dispatchEvent(new InputEvent("input"));
 
 	//radius slider
-	// let spinSlider = document.querySelector("#spinSlider");//\
-	// spinSlider.oninput = e => {														// \
-	// 	spinSpeed = e.target.value;														//  \ This Does
-	// 	spinLabel.innerHTML = Math.round((e.target.value));		//  / Not Work
-	// };																											// /
-	// spinSlider.dispatchEvent(new InputEvent("input"));			///
+	let spinSlider = document.querySelector("#spinSlider");//\
+	spinSlider.oninput = e => {														// \
+		spinSpeed = e.target.value * 0.0001;														//  \ This Does
+		spinLabel.innerHTML = Math.round((e.target.value));		//  / Not Work
+	};																											// /
+	spinSlider.dispatchEvent(new InputEvent("input"));			///
 
 	//handles number of background circles
 	let circleNumSlider = document.querySelector("#circleNumSlider");
