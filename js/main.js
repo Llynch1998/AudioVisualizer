@@ -109,12 +109,12 @@ function setupUI(){
 	volumeSlider.dispatchEvent(new InputEvent("input"));
 
 	//radius slider
-	let radiusSlider = document.querySelector("#radiusSlider");
-	radiusSlider.oninput = e => {
-		maxRadius = e.target.value * 150;
-		radiusLabel.innerHTML = Math.round((e.target.value/2 * 100));
-	};
-	radiusSlider.dispatchEvent(new InputEvent("input"));
+	// let spinSlider = document.querySelector("#spinSlider");//\
+	// spinSlider.oninput = e => {														// \
+	// 	spinSpeed = e.target.value;														//  \ This Does
+	// 	spinLabel.innerHTML = Math.round((e.target.value));		//  / Not Work
+	// };																											// /
+	// spinSlider.dispatchEvent(new InputEvent("input"));			///
 
 	//handles number of background circles
 	let circleNumSlider = document.querySelector("#circleNumSlider");
@@ -185,6 +185,7 @@ function setupUI(){
 
 
 let loopCount = 1.5708;
+let spinSpeed = 0.0001;
 function update() { 
 	// this schedules a call to the update() method in 1/60 seconds
 	requestAnimationFrame(update);
@@ -279,7 +280,7 @@ function update() {
 		// drawCtx.arc(canvasElement.width/2, canvasElement.height/2, circleradius*1.5, 0,2*Math.PI, false);
 		// drawCtx.fill();
 		// drawCtx.closePath();
-		loopCount += 0.0001;
+		loopCount += spinSpeed;
 	}
 	
 }
