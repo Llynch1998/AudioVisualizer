@@ -212,7 +212,7 @@ function update() {
 	//background circles
 	//create a new circle
 	if(circles.length < maxCircles){
-		createCircles(1);
+		createCircles(2);
 	}
 
 	//move the circles
@@ -233,7 +233,7 @@ function update() {
 		//drawCtx.fillRect(canvasElement.width/2,i * (barHeight + barSpacing),-1*(barWidth+audioData[i]*.6),barHeight);
 		drawCtx.beginPath();
 		if(inverseCirc){
-			drawCtx.arc(0,0,(i*1.5)+50,0.00174533,audioData[i]*.0009,true);
+			drawCtx.arc(0,0,(i*1.5)+10,0,audioData[i]*.009,true);
 		}
 		else{
 			drawCtx.arc(0,0,(i*1.5)+10,0,audioData[i]*.009,false);//swap the circles true and false value and switch the starter angle from positive to negative for cool pulsing effect drawCtx.arc(0,0,(i*1.5)+50,0.00174533,audioData[i]*.0009,true);
