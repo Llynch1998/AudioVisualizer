@@ -183,6 +183,8 @@ function setupUI(){
 
 }
 
+
+let loopCount = 1.5708;
 function update() { 
 	// this schedules a call to the update() method in 1/60 seconds
 	requestAnimationFrame(update);
@@ -218,26 +220,27 @@ function update() {
 		
 		drawCtx.save();
 		drawCtx.translate(canvasElement.width/2,canvasElement.height/2);
-		//drawCtx.rotate(60);
+		drawCtx.rotate(loopCount);//making this rotate i gives it a cool result
 		
 		drawCtx.fillStyle = rightcolor;
 		drawCtx.strokeStyle =rightcolor;
 		//drawCtx.fillRect(canvasElement.width/2,i * (barHeight + barSpacing),-1*(barWidth+audioData[i]*.6),barHeight);
 		drawCtx.beginPath();
-		drawCtx.arc(0,0,(i*1.5),-0.00174533,audioData[i]*.009,false);//swap the circles true and false value and switch the starter angle from positive to negative for cool pulsing effect drawCtx.arc(0,0,(i*1.5)+50,0.00174533,audioData[i]*.0009,true);
+		drawCtx.arc(0,5,(i*1.5)+10,-0.00174533,audioData[i]*.009,false);//swap the circles true and false value and switch the starter angle from positive to negative for cool pulsing effect drawCtx.arc(0,0,(i*1.5)+50,0.00174533,audioData[i]*.0009,true);
 		//drawCtx.arc(canvasElement.width/2,canvasElement.height/2,75,1,audioData[i]/100,true);
 		//drawCtx.closePath();
 		drawCtx.stroke();
 		drawCtx.restore();
 		drawCtx.save();
 		drawCtx.translate(canvasElement.width/2,canvasElement.height/2);
+		drawCtx.rotate(loopCount);
 		drawCtx.scale(-1,1);
 		drawCtx.fillStyle = leftcolor;
 		//drawCtx.fillRect(canvasElement.width/2,canvasElement.height-i * (barHeight + barSpacing),1*(barWidth+audioData[audioData.length/2+i]*.6),barHeight);
 		drawCtx.strokeStyle =leftcolor;
 		//drawCtx.fillRect(canvasElement.width/2,i * (barHeight + barSpacing),-1*(barWidth+audioData[i]*.6),barHeight);
 		drawCtx.beginPath();
-		drawCtx.arc(0,0,(i*1.5),0.00174533,-audioData[i]*.009,true);
+		drawCtx.arc(0,-5,(i*1.5)+10,0.00174533,-audioData[i]*.009,true);
 		//drawCtx.arc(canvasElement.width/2,canvasElement.height/2,75,1,audioData[i]/100,true);
 		//drawCtx.closePath();
 		drawCtx.stroke();
@@ -276,6 +279,7 @@ function update() {
 		// drawCtx.arc(canvasElement.width/2, canvasElement.height/2, circleradius*1.5, 0,2*Math.PI, false);
 		// drawCtx.fill();
 		// drawCtx.closePath();
+		loopCount += 0.0001;
 	}
 	
 }
