@@ -5,7 +5,7 @@ class Circle{
 		this.posY = 200;
 		this.originX = this.posX;
 		this.originY = this.posY;
-    this.radius = Math.floor(Math.random() * 5) + 1;
+    	this.radius = Math.floor(Math.random() * 5) + 1;
 		this.incX = (Math.random() * 10) - 5;
 		this.incY = (Math.random() * 10) - 5;
 		this.color = color;
@@ -13,7 +13,7 @@ class Circle{
 		this.alpha = alpha;
     }
 	
-	moveCircle() {
+	moveCircle(radius) {
 		this.posX += this.incX;
 		this.posY += this.incY;
 		if(this.posX < 0 - this.radius || this.posX > 640){
@@ -28,7 +28,7 @@ class Circle{
 		drawCtx.globalAlpha = this.alpha;
 		drawCtx.beginPath();
 		drawCtx.fillStyle = this.color;
-		drawCtx.arc(this.posX, this.posY, this.radius, 0, Math.PI*2, true); 
+		drawCtx.arc(this.posX, this.posY, radius, 0, Math.PI*2, true); 
 		drawCtx.closePath();
 		drawCtx.fill();
 		drawCtx.restore();

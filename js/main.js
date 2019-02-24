@@ -18,7 +18,7 @@ let audioCtx;
 let sourceNode, analyserNode, gainNode;
 const NUM_SAMPLES = 256;
 let audioData = new Uint8Array(NUM_SAMPLES/2); 
-let maxRadius = 200;
+let maxRadius = 10;
 var posX = 20, posY = 100;
 let circles = [];
 let maxCircles = 300;
@@ -28,6 +28,7 @@ let r1,r2,r3;
 let bass = false;
 let bassFilter;
 let inverseCirc = false;
+let bright = false;
 
 
 function init(){
@@ -82,12 +83,11 @@ function setupUI(){
 		if (audioCtx.state == "suspended") {
 			audioCtx.resume();
 		}
-
 		if (e.target.dataset.playing == "no") {
 			audioElement.play();
 			e.target.dataset.playing = "yes";
-		// if track is playing pause it
-		} else if (e.target.dataset.playing == "yes") {
+		}
+		else if (e.target.dataset.playing == "yes") {
 			audioElement.pause();
 			e.target.dataset.playing = "no";
 		}
@@ -179,11 +179,19 @@ function setupUI(){
 		bassToggle();
 	};
 	bassToggle();
+	
 	document.querySelector("#inverseCirc").checked = inverseCirc;
 	document.querySelector("#inverseCirc").onchange = e => {
 		inverseCirc = e.target.checked;
 	};
 
+	//use gradient
+	document.querySelector("#bright").checked = bright;
+	document.querySelector("#bright").onchange = e => {
+		bright = e.target.checked;
+		brightToggle();
+	};
+	brightToggle();
 }
 
 
@@ -212,11 +220,15 @@ function update() {
 	if(circles.length < maxCircles){
 		createCircles(2);
 	}
+	
+	//if track isnt playing, move circles (gives fatal error)
+//	if(document.querySelector("#playButton").target.dataset.playing == "no"){
+//		//move the circles
+//		for(let c of circles){
+//			c.moveCircle();
+//		}
+//	}
 
-	//move the circles
-	for(let c of circles){
-		c.moveCircle();
-	}
 	
 	// loop through the audio data and draw!
 	for(let i=0; i<audioData.length; i++) { 
@@ -225,7 +237,7 @@ function update() {
 		drawCtx.rotate(loopCount);//making this rotate i gives it a cool result
 		
 		drawCtx.fillStyle = rightcolor;
-		drawCtx.strokeStyle =rightcolor;
+		drawCtx.strokeStyle = rightcolor;
 		//drawCtx.fillRect(canvasElement.width/2,i * (barHeight + barSpacing),-1*(barWidth+audioData[i]*.6),barHeight);
 		drawCtx.beginPath();
 		if(inverseCirc){
@@ -263,20 +275,37 @@ function update() {
 
 		//bumping circle stuff
 		let percent = audioData[i]/255;
+		//circles[i].alpha += percent;
+		//makeColor(77,128,204,.34-percent/3.0);
+		
 		
 		//checks which colors are selected
-		if(document.getElementById('r1').checked){
-			circolor1 = makeColor(77,128,204,.34-percent/3.0);
-			circolor2 = makeColor(77,179,128,.10-percent/10.0);
-		}
-		else if(document.getElementById('r2').checked){
-			circolor1 = makeColor(178,34,34,.34-percent/3.0);
-			circolor2 = makeColor(255,145,0,.10-percent/10.0);
-		}
-		else if(document.getElementById('r3').checked){
-			circolor1 = makeColor(0,255,255,.34-percent/3.0);
-			circolor2 = makeColor(255,215,0,.10-percent/10.0);
-		}
+//		if(document.getElementById('r1').checked){
+//			circolor1 = makeColor(77,128,204,.34-percent/3.0);
+//			circolor2 = makeColor(77,179,128,.10-percent/10.0);
+//		}
+//		else if(document.getElementById('r2').checked){
+//			circolor1 = makeColor(178,34,34,.34-percent/3.0);
+//			circolor2 = makeColor(255,145,0,.10-percent/10.0);
+//		}
+//		else if(document.getElementById('r3').checked){
+//			circolor1 = makeColor(0,255,255,.34-percent/3.0);
+//			circolor2 = makeColor(255,215,0,.10-percent/10.0);
+//		}
+		
+		
+		//medium circles
+		maxRadius = maxRadius;
+		let circleradius = percent * maxRadius;
+/*		drawCtx.beginPath();
+		drawCtx.fillStyle = circolor1;
+		drawCtx.arc(canvasElement.width/2, canvasElement.height/2, circleradius, 0,2*Math.PI, false);
+		drawCtx.fill();
+		drawCtx.closePath();*/
+		
+		
+		circles[i].moveCircle(circleradius);
+		
 		loopCount += spinSpeed;
 	}
 	
@@ -339,5 +368,45 @@ function bassToggle(){
 	}
 	else{
 		bassFilter.gain.setValueAtTime(0, audioCtx.currentTime);
+	}
+}
+
+function brightToggle(){
+	if(bright){
+		if(document.querySelector("#r1").checked){
+			var grad = drawCtx.createRadialGradient(320, 200, 25, 320, 200, 150);
+			grad.addColorStop(0, '#00B3E6');                    
+			grad.addColorStop(1, '#00E680');
+			rightcolor = grad;
+			leftcolor = grad;
+		}
+		if(document.querySelector("#r2").checked){
+			var grad = drawCtx.createRadialGradient(320, 200, 25, 320, 200, 150);
+			grad.addColorStop(0, '#DC143C');                    
+			grad.addColorStop(1, '#FFD700');
+			rightcolor = grad;
+			leftcolor = grad;
+		}
+		if(document.querySelector("#r3").checked){
+			var grad = drawCtx.createRadialGradient(320, 200, 25, 320, 200, 150);
+			grad.addColorStop(0, '#00FF00');                    
+			grad.addColorStop(1, '#FF00FF');
+			rightcolor = grad;
+			leftcolor = grad;
+		}
+	}
+	if(!bright){
+		if(document.querySelector("#r1").checked){
+			rightcolor = '#00B3E6';
+			leftcolor = '#00E680';
+		}
+		if(document.querySelector("#r2").checked){
+			rightcolor = '#DC143C';                    
+			leftcolor = '#FFD700';
+		}
+		if(document.querySelector("#r3").checked){
+			rightcolor = '#00FF00';                    
+			leftcolor = '#FF00FF';
+		}
 	}
 }
