@@ -27,7 +27,7 @@ let circolor1, circolor2;
 let r1,r2,r3;
 let bass = false;
 let bassFilter;
-let inverseCirc = false;
+let waveform = false;
 let bright = false;
 let loopCount = 1.5708;
 let spinSpeed = 0.0001;
@@ -189,6 +189,7 @@ function setupUI(){
 		requestFullscreen(canvasElement);
 	};
 
+	//bass checkbox
 	document.querySelector("#bassCB").checked = bass;
 	document.querySelector("#bassCB").onchange = e => {
 		bass = e.target.checked;
@@ -196,12 +197,13 @@ function setupUI(){
 	};
 	bassToggle();
 	
-	document.querySelector("#inverseCirc").checked = inverseCirc;
-	document.querySelector("#inverseCirc").onchange = e => {
-		inverseCirc = e.target.checked;
+	//waveform checkbox
+	document.querySelector("#waveform").checked = waveform;
+	document.querySelector("#waveform").onchange = e => {
+		waveform = e.target.checked;
 	};
 
-	//use gradient
+	//gradient checkbox
 	document.querySelector("#bright").checked = bright;
 	document.querySelector("#bright").onchange = e => {
 		bright = e.target.checked;
@@ -215,12 +217,13 @@ function setupUI(){
 function update() { 
 	// this schedules a call to the update() method in 1/60 seconds
 	requestAnimationFrame(update);
-	// console.log("max circles "  + maxCircles);
-	// console.log(circles.length)
-	// populate the audioData with the frequency data
-	// notice these arrays are passed "by reference" 
-	analyserNode.getByteFrequencyData(audioData);
-	//OR analyserNode.getByteTimeDomainData(audioData); // waveform data
+	
+	if(waveform){
+	   analyserNode.getByteTimeDomainData(audioData); // waveform data
+	}
+	else{
+		analyserNode.getByteFrequencyData(audioData);
+	}
 
 	// DRAW!
 	drawCtx.clearRect(0,0,800,600);  
@@ -235,15 +238,6 @@ function update() {
 	if(circles.length < maxCircles){
 		createCircles(2);
 	}
-	
-	//if track isnt playing, move circles (gives fatal error)
-//	if(document.querySelector("#playButton").target.dataset.playing == "no"){
-//		//move the circles
-//		for(let c of circles){
-//			c.moveCircle();
-//		}
-//	}
-
 	
 	// loop through the audio data and draw!
 	for(let i=0; i<audioData.length; i++) { 
@@ -260,22 +254,10 @@ function update() {
 			drawCtx.strokeStyle = rightcolor;
 		}
 		
-		//drawCtx.fillRect(canvasElement.width/2,i * (barHeight + barSpacing),-1*(barWidth+audioData[i]*.6),barHeight);
-		
-		if(inverseCirc){
-			drawCtx.beginPath();
-			drawCtx.arc(0,0,(i*1.5)+10,0,audioData[i]*.009,true);
-			drawCtx.stroke();
-			drawCtx.closePath();
-		}
-		else{
-			drawCtx.beginPath();
-			drawCtx.arc(0,0,(i*1.5)+10,0,audioData[i]*.009,false);//swap the circles true and false value and switch the starter angle from positive to negative for cool pulsing effect drawCtx.arc(0,0,(i*1.5)+50,0.00174533,audioData[i]*.0009,true);
-			drawCtx.stroke();
-			drawCtx.closePath();
-		}
-		//drawCtx.arc(canvasElement.width/2,canvasElement.height/2,75,1,audioData[i]/100,true);
-		//drawCtx.closePath();
+		drawCtx.beginPath();
+		drawCtx.arc(0,0,(i*1.5)+10,0,audioData[i]*.009,false);//swap the circles true and false value and switch the starter angle from positive to negative for cool pulsing effect drawCtx.arc(0,0,(i*1.5)+50,0.00174533,audioData[i]*.0009,true);
+		drawCtx.stroke();
+		drawCtx.closePath();
 		
 		drawCtx.restore();
 		drawCtx.save();
@@ -283,64 +265,22 @@ function update() {
 		drawCtx.rotate(loopCount);
 		drawCtx.scale(-1,1);
 		drawCtx.fillStyle = leftcolor;
-		//drawCtx.fillRect(canvasElement.width/2,canvasElement.height-i * (barHeight + barSpacing),1*(barWidth+audioData[audioData.length/2+i]*.6),barHeight);
 		drawCtx.strokeStyle =leftcolor;
-		//drawCtx.fillRect(canvasElement.width/2,i * (barHeight + barSpacing),-1*(barWidth+audioData[i]*.6),barHeight);
 		
-		
-		if(inverseCirc){
-			drawCtx.beginPath();
-			drawCtx.arc(0,0,(i*1.5)+10,0,-audioData[i]*.009,false);
-			drawCtx.stroke();
-			drawCtx.closePath();
-		}
-		else{
-			drawCtx.beginPath();
-			drawCtx.arc(0,0,(i*1.5)+10,0,-audioData[i]*.009,true);
-			drawCtx.stroke();
-			drawCtx.closePath();
-		}
-		
-		//drawCtx.arc(canvasElement.width/2,canvasElement.height/2,75,1,audioData[i]/100,true);
-		//drawCtx.closePath();
-		
+		drawCtx.beginPath();
+		drawCtx.arc(0,0,(i*1.5)+10,0,-audioData[i]*.009,true);
+		drawCtx.stroke();
+		drawCtx.closePath();
 		drawCtx.restore();
 
 
 		//bumping circle stuff
 		let percent = audioData[i]/255;
-		//circles[i].alpha += percent;
-		//makeColor(77,128,204,.34-percent/3.0);
-		
-		
-		//checks which colors are selected
-//		if(document.getElementById('r1').checked){
-//			circolor1 = makeColor(77,128,204,.34-percent/3.0);
-//			circolor2 = makeColor(77,179,128,.10-percent/10.0);
-//		}
-//		else if(document.getElementById('r2').checked){
-//			circolor1 = makeColor(178,34,34,.34-percent/3.0);
-//			circolor2 = makeColor(255,145,0,.10-percent/10.0);
-//		}
-//		else if(document.getElementById('r3').checked){
-//			circolor1 = makeColor(0,255,255,.34-percent/3.0);
-//			circolor2 = makeColor(255,215,0,.10-percent/10.0);
-//		}
-		
-		
-		//medium circles
 		maxRadius = maxRadius;
 		let circleradius = (percent * maxRadius) + 4;
-/*		drawCtx.beginPath();
-		drawCtx.fillStyle = circolor1;
-		drawCtx.arc(canvasElement.width/2, canvasElement.height/2, circleradius, 0,2*Math.PI, false);
-		drawCtx.fill();
-		drawCtx.closePath();*/
-		
 		if(i < circles.length){
 			circles[i].moveCircle(circleradius);
 		}
-		
 		
 		loopCount += spinSpeed;
 	}
@@ -368,10 +308,25 @@ function requestFullscreen(element) {
 
 //craetes circles based on number passed in
 function createCircles(numCircles){
-    for(let i=0; i<numCircles; i++){
-        let c = new Circle(getRandomColorC(),.5);
-        circles.push(c);
-    }
+	if(document.querySelector("#r1").checked){
+		for(let i=0; i<numCircles; i++){
+			let c = new Circle(getRandomColorC(),.5);
+			circles.push(c);
+		}
+	}
+	if(document.querySelector("#r2").checked){
+		for(let i=0; i<numCircles; i++){
+			let c = new Circle(getRandomColorW(),.5);
+			circles.push(c);
+		}
+	}
+	if(document.querySelector("#r3").checked){
+		for(let i=0; i<numCircles; i++){
+			let c = new Circle(getRandomColorN(),.5);
+			circles.push(c);
+		}
+	}
+    
 }
 
 function clearCircles(){
@@ -410,21 +365,21 @@ function bassToggle(){
 function brightToggle(){
 	if(bright){
 		if(document.querySelector("#r1").checked){
-			var grad = drawCtx.createRadialGradient(canvasElement.width/2, canvasElement.height/2, 20, 320, 200, 150);
+			grad = drawCtx.createRadialGradient(canvasElement.width/2, canvasElement.height/2, 20, 320, 200, 150);
 			grad.addColorStop(0, '#00B3E6');                    
 			grad.addColorStop(1, '#00E680');
 			rightcolor = grad;
 			leftcolor = grad;
 		}
 		if(document.querySelector("#r2").checked){
-			var grad = drawCtx.createRadialGradient(canvasElement.width/2, canvasElement.height/2, 25, 320, 200, 150);
+			grad = drawCtx.createRadialGradient(canvasElement.width/2, canvasElement.height/2, 25, 320, 200, 150);
 			grad.addColorStop(0, '#DC143C');                    
 			grad.addColorStop(1, '#FFD700');
 			rightcolor = grad;
 			leftcolor = grad;
 		}
 		if(document.querySelector("#r3").checked){
-			var grad = drawCtx.createRadialGradient(canvasElement.width/2, canvasElement.height/2, 25, 320, 200, 150);
+			grad = drawCtx.createRadialGradient(canvasElement.width/2, canvasElement.height/2, 25, 320, 200, 150);
 			grad.addColorStop(0, '#00FF00');                    
 			grad.addColorStop(1, '#FF00FF');
 			rightcolor = grad;
