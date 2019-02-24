@@ -29,6 +29,10 @@ let bass = false;
 let bassFilter;
 let inverseCirc = false;
 let bright = false;
+let loopCount = 1.5708;
+let spinSpeed = 0.0001;
+
+var grad;
 
 
 function init(){
@@ -74,6 +78,9 @@ function setupWebaudio(){
 function setupCanvas(){
 	canvasElement = document.querySelector('canvas');
 	drawCtx = canvasElement.getContext("2d");
+	grad = drawCtx.createRadialGradient(canvasElement.width/2, canvasElement.height/2, 20, 320, 200, 150);
+			grad.addColorStop(0, '#00B3E6');                    
+			grad.addColorStop(1, '#00E680');
 }
 
 function setupUI(){
@@ -204,8 +211,7 @@ function setupUI(){
 }
 
 
-let loopCount = 1.5708;
-let spinSpeed = 0.0001;
+
 function update() { 
 	// this schedules a call to the update() method in 1/60 seconds
 	requestAnimationFrame(update);
@@ -245,19 +251,32 @@ function update() {
 		drawCtx.translate(canvasElement.width/2,canvasElement.height/2);
 		drawCtx.rotate(loopCount);//making this rotate i gives it a cool result
 		
-		drawCtx.fillStyle = rightcolor;
-		drawCtx.strokeStyle = rightcolor;
-		//drawCtx.fillRect(canvasElement.width/2,i * (barHeight + barSpacing),-1*(barWidth+audioData[i]*.6),barHeight);
-		drawCtx.beginPath();
-		if(inverseCirc){
-			drawCtx.arc(0,0,(i*1.5),0,-audioData[i]*.009,false);
+		if(bright){
+			drawCtx.fillStyle = grad;
+			drawCtx.strokeStyle = grad;
 		}
 		else{
+			drawCtx.fillStyle = rightcolor;
+			drawCtx.strokeStyle = rightcolor;
+		}
+		
+		//drawCtx.fillRect(canvasElement.width/2,i * (barHeight + barSpacing),-1*(barWidth+audioData[i]*.6),barHeight);
+		
+		if(inverseCirc){
+			drawCtx.beginPath();
+			drawCtx.arc(0,0,(i*1.5)+10,0,audioData[i]*.009,true);
+			drawCtx.stroke();
+			drawCtx.closePath();
+		}
+		else{
+			drawCtx.beginPath();
 			drawCtx.arc(0,0,(i*1.5)+10,0,audioData[i]*.009,false);//swap the circles true and false value and switch the starter angle from positive to negative for cool pulsing effect drawCtx.arc(0,0,(i*1.5)+50,0.00174533,audioData[i]*.0009,true);
+			drawCtx.stroke();
+			drawCtx.closePath();
 		}
 		//drawCtx.arc(canvasElement.width/2,canvasElement.height/2,75,1,audioData[i]/100,true);
 		//drawCtx.closePath();
-		drawCtx.stroke();
+		
 		drawCtx.restore();
 		drawCtx.save();
 		drawCtx.translate(canvasElement.width/2,canvasElement.height/2);
@@ -267,18 +286,24 @@ function update() {
 		//drawCtx.fillRect(canvasElement.width/2,canvasElement.height-i * (barHeight + barSpacing),1*(barWidth+audioData[audioData.length/2+i]*.6),barHeight);
 		drawCtx.strokeStyle =leftcolor;
 		//drawCtx.fillRect(canvasElement.width/2,i * (barHeight + barSpacing),-1*(barWidth+audioData[i]*.6),barHeight);
-		drawCtx.beginPath();
+		
 		
 		if(inverseCirc){
-			drawCtx.arc(0,0,(i*1.5),0,audioData[i]*.009,true);
+			drawCtx.beginPath();
+			drawCtx.arc(0,0,(i*1.5)+10,0,-audioData[i]*.009,false);
+			drawCtx.stroke();
+			drawCtx.closePath();
 		}
 		else{
+			drawCtx.beginPath();
 			drawCtx.arc(0,0,(i*1.5)+10,0,-audioData[i]*.009,true);
+			drawCtx.stroke();
+			drawCtx.closePath();
 		}
 		
 		//drawCtx.arc(canvasElement.width/2,canvasElement.height/2,75,1,audioData[i]/100,true);
 		//drawCtx.closePath();
-		drawCtx.stroke();
+		
 		drawCtx.restore();
 
 
