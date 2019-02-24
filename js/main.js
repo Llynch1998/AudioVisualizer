@@ -303,8 +303,10 @@ function update() {
 		drawCtx.fill();
 		drawCtx.closePath();*/
 		
+		if(i < circles.length){
+			circles[i].moveCircle(circleradius);
+		}
 		
-		circles[i].moveCircle(circleradius);
 		
 		loopCount += spinSpeed;
 	}
