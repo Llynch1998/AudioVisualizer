@@ -142,6 +142,9 @@ function setupUI(){
 	r1.onclick = e => {
 		rightcolor = '#00B3E6';
 		leftcolor = '#00E680';
+		if(bright){
+			brightToggle();
+		}
 		for(let c of circles){
 			c.color = getRandomColorC();
 		}
@@ -150,6 +153,9 @@ function setupUI(){
 	r2.onclick = e => {
 		rightcolor = '#DC143C';
 		leftcolor = '#FFD700';
+		if(bright){
+			brightToggle();
+		}
 		for(let c of circles){
 			c.color = getRandomColorW();
 		}
@@ -158,6 +164,9 @@ function setupUI(){
 	r3.onclick = e => {
 		rightcolor = '#00FF00';
 		leftcolor = '#FF00FF';
+		if(bright){
+			brightToggle();
+		}
 		for(let c of circles){
 			c.color = getRandomColorN();
 		}
@@ -376,21 +385,21 @@ function bassToggle(){
 function brightToggle(){
 	if(bright){
 		if(document.querySelector("#r1").checked){
-			var grad = drawCtx.createRadialGradient(320, 200, 25, 320, 200, 150);
+			var grad = drawCtx.createRadialGradient(canvasElement.width/2, canvasElement.height/2, 20, 320, 200, 150);
 			grad.addColorStop(0, '#00B3E6');                    
 			grad.addColorStop(1, '#00E680');
 			rightcolor = grad;
 			leftcolor = grad;
 		}
 		if(document.querySelector("#r2").checked){
-			var grad = drawCtx.createRadialGradient(320, 200, 25, 320, 200, 150);
+			var grad = drawCtx.createRadialGradient(canvasElement.width/2, canvasElement.height/2, 25, 320, 200, 150);
 			grad.addColorStop(0, '#DC143C');                    
 			grad.addColorStop(1, '#FFD700');
 			rightcolor = grad;
 			leftcolor = grad;
 		}
 		if(document.querySelector("#r3").checked){
-			var grad = drawCtx.createRadialGradient(320, 200, 25, 320, 200, 150);
+			var grad = drawCtx.createRadialGradient(canvasElement.width/2, canvasElement.height/2, 25, 320, 200, 150);
 			grad.addColorStop(0, '#00FF00');                    
 			grad.addColorStop(1, '#FF00FF');
 			rightcolor = grad;
