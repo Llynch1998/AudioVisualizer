@@ -296,7 +296,7 @@ function update() {
 		
 		//medium circles
 		maxRadius = maxRadius;
-		let circleradius = percent * maxRadius;
+		let circleradius = (percent * maxRadius) + 4;
 /*		drawCtx.beginPath();
 		drawCtx.fillStyle = circolor1;
 		drawCtx.arc(canvasElement.width/2, canvasElement.height/2, circleradius, 0,2*Math.PI, false);
