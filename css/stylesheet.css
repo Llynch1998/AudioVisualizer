@@ -1,6 +1,7 @@
 body {
 	background: #1a1a1a;
 	font-family: 'Merienda One', cursive;
+	
   color: white;
   height: 700px;
   display: grid;
@@ -12,8 +13,8 @@ body {
 }
 
 canvas {
-	
-	margin-left: 10px;
+	margin-left: 10%;
+	margin-top: 16%;
 	/* This centers our sketch horizontally. */
 	justify-content:left;
 	/* This centers our sketch vertically. */
@@ -25,12 +26,12 @@ canvas {
 }
 
 #controls{
-	margin-left:5%;
-	//margin-top:5%;
+	margin-left:25%;
+	margin-top:5%;
 	background-color: #353535;
 	border-radius: 15px;
-  width: 25em;
-  grid-area: controls;
+  	width: 25em;
+	grid-area: controls;
 }
 
 section{
@@ -39,7 +40,7 @@ section{
 .name{
 	font-size: 2em;
 	text-align: center;
-	margin-left: 22%;
+	margin-left: 15%;
 }
 
 button[data-playing="yes"]:after{
@@ -54,7 +55,7 @@ button {
 	display: inline-block;
 	padding: 10px 20px;
 	font-family: 'Merienda One', cursive;
-	font-size: 1.2em;
+	font-size: 1.3em;
 	cursor: pointer;
 	text-align: center;
 	text-decoration: none;
@@ -105,16 +106,17 @@ button:active {
 
 /* The container */
 .container1 {
-  display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+	display: block;
+	position: relative;
+	padding-left: 35px;
+	margin-bottom: 12px;
+	cursor: pointer;
+	font-size: 22px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	font-size: 1.3em;
 }
 
 /* Hide the browser's default checkbox */
@@ -160,29 +162,30 @@ button:active {
 
 /* Style the checkmark/indicator */
 .container1 .checkmark1:after {
-  left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
+	left: 9px;
+	top: 5px;
+	width: 5px;
+	height: 10px;
+	border: solid white;
+	border-width: 0 3px 3px 0;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
 }
 
 /* The container */
 .container2 {
-  display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+	display: block;
+	position: relative;
+	padding-left: 35px;
+	margin-bottom: 12px;
+	cursor: pointer;
+	font-size: 22px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	font-size: 1.3em;
 }
 
 /* Hide the browser's default radio button */
@@ -210,7 +213,7 @@ button:active {
 
 /* When the radio button is checked, add a blue background */
 .container2 input:checked ~ .checkmark2 {
-  background-color: #2196F3;
+  background-color: #1a1a1a;
 }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */
