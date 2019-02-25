@@ -220,7 +220,7 @@ function setupUI(){
 
 function elapsedTime(seconds){
 	let currentSeconds = Math.floor(seconds%60);
-	if(seconds < 10){
+	if(currentSeconds < 10){
 		currentSeconds = "0" + currentSeconds;
 	}
 	let minutes = Math.floor(seconds/60);
