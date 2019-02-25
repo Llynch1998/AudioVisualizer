@@ -252,33 +252,43 @@ button:active {
   transition: width .1s linear;
 }
 /*responsiveness*/
-@media (max-width: 412px){
-	.flex-container{
-		display: flex;
-		flex-direction: column;
-		flex-wrap: wrap;
+@media (max-width: 640px){
+	body {
+		padding: 0;
+		margin: 0;
+		background: #1a1a1a;
+		font-family: 'Merienda One', cursive;
+		color: white;
+		height: 700px;
+		display: grid;
+		grid-template-rows: 45vh 1fr;
+		grid-template-columns:1fr;
+		grid-template-areas: 
+		"canvas"
+		"controls";
 	}
-	
-	body{
-		height: 550px;
-		font-size: .8em;
-	}
-	
-    #controls{
-		flex-direction: row;
-		align-self: flex-start;
-		margin:2%;
-		margin-left:5%;
+	canvas {
+		margin-left: 0;
+		margin-top: 5px;
+		width: 100vw;
+		/* This centers our sketch horizontally. */
+		justify-content:left;
+		/* This centers our sketch vertically. */
 		align-items: center;
-	}
-	
-	canvas{
-		align-self: flex-start;
-		margin: 2%;
-		border-radius: 0px;
-		align-self: flex-end;
+		box-shadow: 4px 4px 8px rgba(0,0,0,0.5);
+		background: black;
+		border-radius: 15px;
+		grid-area: canvas;
 	}
 
-
+	#controls{
+		margin-left:0;
+		margin-top:0;
+		background-color: #353535;
+		border-radius: 15px;
+		width: 100vw;
+		height: 80vh;
+		grid-area: controls;
+	}
 }
 

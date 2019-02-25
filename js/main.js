@@ -218,7 +218,7 @@ function setupUI(){
 	
 }
 
-function elapsedTime(seconds){
+function elapsedTime(seconds){//based off a guid at https://medium.com/@thomasmarren/create-a-custom-audio-progress-bar-using-javascript-51b358811abd
 	let currentSeconds = Math.floor(seconds%60);
 	if(currentSeconds < 10){
 		currentSeconds = "0" + currentSeconds;
@@ -231,12 +231,13 @@ function elapsedTime(seconds){
 function update() { 
 	// this schedules a call to the update() method in 1/60 seconds
 	requestAnimationFrame(update);
+		
+		//audio progress code
 		duration = (audioElement.duration);
-		
 		currentTime = (audioElement.currentTime);
-		
 		document.querySelector("#currentTime").innerHTML = elapsedTime(currentTime);
 		document.querySelector("#duration").innerHTML = elapsedTime(duration);
+	
 	if(waveform){
 	   analyserNode.getByteTimeDomainData(audioData); // waveform data
 	}
