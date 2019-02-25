@@ -267,7 +267,7 @@ button:active {
 		color: white;
 		height: 700px;
 		display: grid;
-		grid-template-rows: 45vh 1fr;
+		grid-template-rows: 62.5vw 1fr;
 		grid-template-columns:1fr;
 		grid-template-areas: 
 		"canvas"
@@ -290,11 +290,11 @@ button:active {
 
 	#controls{
 		margin-left:0;
-		margin-top:0;
+		margin-top:30px;
 		background-color: #353535;
 		border-radius: 15px;
 		width: 100vw;
-		height: 80vh;
+		height: 46em;
 		grid-area: controls;
 	}
 }
