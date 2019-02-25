@@ -215,7 +215,6 @@ app.main = (function(){
 		//audio progress
 
 	}
-<<<<<<< HEAD
 	
 	// loop through the audio data and draw!
 	for(let i=0; i<audioData.length; i++) { 
@@ -306,24 +305,6 @@ function createCircles(numCircles){
 		for(let i=0; i<numCircles; i++){
 			let c = new Circle(getRandomColorW(),.5);
 			circles.push(c);
-=======
-
-	function update() { 
-		// this schedules a call to the update() method in 1/60 seconds
-		requestAnimationFrame(update);
-
-			//audio progress code
-			duration = (audioElement.duration);
-			currentTime = (audioElement.currentTime);
-			document.querySelector("#currentTime").innerHTML = app.utilities.elapsedTime(currentTime);
-			document.querySelector("#duration").innerHTML = app.utilities.elapsedTime(duration);
-
-		if(waveform){
-		   analyserNode.getByteTimeDomainData(audioData); // waveform data
-		}
-		else{
-			analyserNode.getByteFrequencyData(audioData);
->>>>>>> 86d1a0d2bbe4caafdad2fd70c0684d50180bc012
 		}
 
 		// DRAW!
