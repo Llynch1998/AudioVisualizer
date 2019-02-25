@@ -31,7 +31,8 @@ let waveform = false;
 let bright = false;
 let loopCount = 1.5708;
 let spinSpeed = 0.0001;
-
+let duration;
+let currentTime;
 var grad;
 
 
@@ -54,6 +55,7 @@ function setupWebaudio(){
 	// 2 - get a reference to the <audio> element on the page
 	audioElement = document.querySelector("audio");
 	audioElement.src = SOUND_PATH.sound1;
+	
 
 	// 3 - create an a source node that points at the <audio> element
 	sourceNode = audioCtx.createMediaElementSource(audioElement);
@@ -141,6 +143,7 @@ function setupUI(){
 	document.querySelector("#trackSelect").onchange = e =>{
 		audioElement.src = e.target.value;
 		playButton.dataset.playing = "no";
+		
 	};
 	
 	
@@ -210,14 +213,30 @@ function setupUI(){
 		brightToggle();
 	};
 	brightToggle();
+
+	//audio progress
+	
 }
 
+function elapsedTime(seconds){
+	let currentSeconds = Math.floor(seconds%60);
+	if(seconds < 10){
+		currentSeconds = "0" + currentSeconds;
+	}
+	let minutes = Math.floor(seconds/60);
+	return minutes + ":" + currentSeconds
+}
 
 
 function update() { 
 	// this schedules a call to the update() method in 1/60 seconds
 	requestAnimationFrame(update);
-	
+		duration = (audioElement.duration);
+		
+		currentTime = (audioElement.currentTime);
+		
+		document.querySelector("#currentTime").innerHTML = elapsedTime(currentTime);
+		document.querySelector("#duration").innerHTML = elapsedTime(duration);
 	if(waveform){
 	   analyserNode.getByteTimeDomainData(audioData); // waveform data
 	}
