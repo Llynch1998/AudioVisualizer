@@ -1,18 +1,21 @@
+*{
+	margin:0;
+	padding: 0;
+}
 body {
 	background: #1a1a1a;
 	font-family: 'Merienda One', cursive;
 	color: white;
 	height: 700px;
 	display: grid;
-	grid-template-rows: 30em 1fr;
-	grid-template-columns: 30em 1fr;
+	grid-template-rows: 1fr 1fr;
+	grid-template-columns: 1em 25em 15px 40vw;
 	grid-template-areas: 
-	"controls canvas"
-	"controls .";
+	". controls . canvas"
+	". controls . canvas";
 }
 
 canvas {
-	margin-left: 10%;
 	margin-top: 16%;
 	/* This centers our sketch horizontally. */
 	justify-content:left;
@@ -21,15 +24,18 @@ canvas {
 	box-shadow: 4px 4px 8px rgba(0,0,0,0.5);
 	background: black;
 	border-radius: 15px;
+	width: 50vw;
+	height: 31.25vw;
 	grid-area: canvas;
 }
 
 #controls{
-	margin-left:25%;
+	margin-right: 10px;
 	margin-top:5%;
+	height: 46em;
 	background-color: #353535;
 	border-radius: 15px;
-  	width: 25em;
+  width: 25em;
 	grid-area: controls;
 }
 
@@ -271,6 +277,7 @@ button:active {
 		margin-left: 0;
 		margin-top: 5px;
 		width: 100vw;
+		height: 62.5vw;
 		/* This centers our sketch horizontally. */
 		justify-content:left;
 		/* This centers our sketch vertically. */
