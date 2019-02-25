@@ -261,6 +261,14 @@ function update() {
 	
 	// loop through the audio data and draw!
 	for(let i=0; i<audioData.length; i++) { 
+		drawCtx.strokeStyle = 'rgba(255,255,255,.1)';
+		drawCtx.beginPath();
+		drawCtx.moveTo(canvasElement.width*.33,0);
+		//drawCtx.bezierCurve(1stControlx, 1stControly, 2ndcontrolX, 2ndControlY, endX,endY);
+		drawCtx.bezierCurveTo(canvasElement.width*.33- audioData[audioData.length*.25 -i],canvasElement.height/4 + 10 ,canvasElement.width*.33,canvasElement.height,canvasElement.width*.33,canvasElement.height);
+		//drawCtx.closePath();
+		drawCtx.stroke();
+
 		drawCtx.save();
 		drawCtx.translate(canvasElement.width/2,canvasElement.height/2);
 		drawCtx.rotate(loopCount);//making this rotate i gives it a cool result
@@ -292,6 +300,8 @@ function update() {
 		drawCtx.stroke();
 		drawCtx.closePath();
 		drawCtx.restore();
+
+		
 
 
 		//bumping circle stuff

@@ -5,7 +5,7 @@ class Circle{
 		this.posY = 200;
 		this.originX = this.posX;
 		this.originY = this.posY;
-    	this.radius = Math.floor(Math.random() * 5) + 1;
+    this.radius = Math.floor(Math.random() * 5) + 1;
 		this.incX = (Math.random() * 10) - 5;
 		this.incY = (Math.random() * 10) - 5;
 		this.color = color;
@@ -35,3 +35,4 @@ class Circle{
 	}
 
 }
+
