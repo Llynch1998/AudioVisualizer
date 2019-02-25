@@ -1,15 +1,14 @@
 body {
 	background: #1a1a1a;
 	font-family: 'Merienda One', cursive;
-	
-  color: white;
-  height: 700px;
-  display: grid;
-  grid-template-rows: 30em 1fr;
-  grid-template-columns: 30em 1fr;
-  grid-template-areas: 
-  "controls canvas"
-  "controls .";
+	color: white;
+	height: 700px;
+	display: grid;
+	grid-template-rows: 30em 1fr;
+	grid-template-columns: 30em 1fr;
+	grid-template-areas: 
+	"controls canvas"
+	"controls .";
 }
 
 canvas {
@@ -21,8 +20,8 @@ canvas {
 	align-items: center;
 	box-shadow: 4px 4px 8px rgba(0,0,0,0.5);
 	background: black;
-  border-radius: 15px;
-  grid-area: canvas;
+	border-radius: 15px;
+	grid-area: canvas;
 }
 
 #controls{
@@ -50,6 +49,8 @@ button[data-playing="yes"]:after{
 button[data-playing="no"]:after{
 	content: "Play";
 }
+
+/*The following code through the flexbox stuff was taken from w3schools's tutorials on buttons, sliders, checkmarks, and containers.  We adjusted the colors and sizes a bit.  You can find their website here: https://www.w3schools.com/*/
 
 button {
 	display: inline-block;
@@ -237,8 +238,42 @@ button:active {
 	border-radius: 50%;
 	background: white;
 }
+/*End of w3schools*/
 
+/*flexbox stuff*/
 .flex-container{
 	display: flex;
 	flex-direction: column;
 }
+
+/*responsiveness*/
+@media (max-width: 412px){
+	.flex-container{
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+	}
+	
+	body{
+		height: 550px;
+		font-size: .8em;
+	}
+	
+    #controls{
+		flex-direction: row;
+		align-self: flex-start;
+		margin:2%;
+		margin-left:5%;
+		align-items: center;
+	}
+	
+	canvas{
+		align-self: flex-start;
+		margin: 2%;
+		border-radius: 0px;
+		align-self: flex-end;
+	}
+
+
+}
+
