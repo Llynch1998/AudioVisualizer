@@ -1,20 +1,45 @@
-//circles function with move, relfect, and follow player functions
-class Circle{
-    constructor(color = 0xFF0000,alpha){
-		this.posX = 320;
-		this.posY = 200;
-		this.originX = this.posX;
-		this.originY = this.posY;
-    this.radius = Math.floor(Math.random() * 5) + 1;
-		this.incX = (Math.random() * 10) - 5;
-		this.incY = (Math.random() * 10) - 5;
-		this.color = color;
-		this.actve = true;
-		this.alpha = alpha;
-    }
-	
-	moveCircle(radius) {
-		this.posX += this.incX;
+var app = app || {};
+
+app.classes = (function(){
+
+
+	//circles function with move, relfect, and follow player functions
+	class Circle{
+		constructor(color ,alpha){
+			this.posX = 320;
+			this.posY = 200;
+			this.originX = this.posX;
+			this.originY = this.posY;
+			this.radius = Math.floor(Math.random() * 5) + 1;
+			this.incX = (Math.random() * 10) - 5;
+			this.incY = (Math.random() * 10) - 5;
+			this.color = color;
+			this.actve = true;
+			this.alpha = alpha;
+
+		}
+
+		
+
+	}
+	function CreateCircle(uColor = 0xFF0000, number){
+		let circles = [];
+		for(let i = 0; i<number; i++){
+		let c = {};
+
+		c.posX= canvasElement.width/2;
+		c.posY = canvasElement.height/2;
+		c.originX = posX;
+		c.originY = posY;
+		c.radius = Math.floor(Math.random() * 5) + 1;
+		c.incX = (Math.random() * 10) - 5;
+		c.incY = (Math.random() * 10) - 5;
+		c.color = uColor;
+		c.actve = true;
+		c.alpha = .5;
+
+		c.display = function(drawCtx){
+			this.posX += this.incX;
 		this.posY += this.incY;
 		if(this.posX < 0 - this.radius || this.posX > 640){
 			this.posX = this.originX;
@@ -32,7 +57,12 @@ class Circle{
 		drawCtx.closePath();
 		drawCtx.fill();
 		drawCtx.restore();
+		}
+		
+	}
+	
+	return{
+		
 	}
 
-}
-
+})();
