@@ -245,7 +245,12 @@ button:active {
 	display: flex;
 	flex-direction: column;
 }
-
+#progress {
+  width: 1px;
+  height: 3px;
+  background: #006B5A;
+  transition: width .1s linear;
+}
 /*responsiveness*/
 @media (max-width: 412px){
 	.flex-container{

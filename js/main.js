@@ -31,7 +31,6 @@ let waveform = false;
 let bright = false;
 let loopCount = 1.5708;
 let spinSpeed = 0.0001;
-
 var grad;
 
 
@@ -210,7 +209,33 @@ function setupUI(){
 		brightToggle();
 	};
 	brightToggle();
+
+	//Audio Progress bar code
+var timer;
+var percent = 0;
+var audio = document.querySelector("#audio");
+audio.playing = e =>{
+  var duration = e.target.duration;
+  advance(duration, audio);
+};
+audio.addEventListener("pause", function(_event) {
+  clearTimeout(timer);
+});
+var advance = function(duration, element) {
+  var progress = document.getElementById("progress");
+  increment = 10/duration
+  percent = Math.min(increment * element.currentTime * 10, 100);
+  progress.style.width = percent+'%'
+  startTimer(duration, element);
 }
+var startTimer = function(duration, element){ 
+  if(percent < 100) {
+    timer = setTimeout(function (){advance(duration, element)}, 100);
+  }
+}
+}
+
+
 
 
 
