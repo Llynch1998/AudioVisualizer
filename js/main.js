@@ -80,9 +80,7 @@ function setupWebaudio(){
 function setupCanvas(){
 	canvasElement = document.querySelector('canvas');
 	drawCtx = canvasElement.getContext("2d");
-	grad = drawCtx.createRadialGradient(canvasElement.width/2, canvasElement.height/2, 20, 320, 200, 150);
-			grad.addColorStop(0, '#00B3E6');                    
-			grad.addColorStop(1, '#00E680');
+
 }
 
 function setupUI(){
@@ -283,15 +281,16 @@ function update() {
 		drawCtx.translate(canvasElement.width/2,canvasElement.height/2);
 		drawCtx.rotate(loopCount);//making this rotate i gives it a cool result
 		
+		
+		
+		drawCtx.fillStyle = rightcolor;
+		drawCtx.strokeStyle = rightcolor;
+		
 		if(bright){
 			drawCtx.fillStyle = grad;
 			drawCtx.strokeStyle = grad;
 		}
-		else{
-			drawCtx.fillStyle = rightcolor;
-			drawCtx.strokeStyle = rightcolor;
-		}
-		
+
 		drawCtx.beginPath();
 		drawCtx.arc(0,0,(i*1.5)+10,0,audioData[i]*.009,false);//swap the circles true and false value and switch the starter angle from positive to negative for cool pulsing effect drawCtx.arc(0,0,(i*1.5)+50,0.00174533,audioData[i]*.0009,true);
 		drawCtx.stroke();
@@ -304,6 +303,10 @@ function update() {
 		drawCtx.scale(-1,1);
 		drawCtx.fillStyle = leftcolor;
 		drawCtx.strokeStyle =leftcolor;
+		if(bright){
+			drawCtx.fillStyle = grad;
+			drawCtx.strokeStyle = grad;
+		}
 		
 		drawCtx.beginPath();
 		drawCtx.arc(0,0,(i*1.5)+10,0,-audioData[i]*.009,true);
@@ -405,21 +408,21 @@ function bassToggle(){
 function brightToggle(){
 	if(bright){
 		if(document.querySelector("#r1").checked){
-			grad = drawCtx.createRadialGradient(canvasElement.width/2, canvasElement.height/2, 20, 320, 200, 150);
+			grad = drawCtx.createRadialGradient(canvasElement.width/2, canvasElement.height/2, canvasElement.width/3, 320, 200, canvasElement.height );
 			grad.addColorStop(0, '#00B3E6');                    
 			grad.addColorStop(1, '#00E680');
 			rightcolor = grad;
 			leftcolor = grad;
 		}
 		if(document.querySelector("#r2").checked){
-			grad = drawCtx.createRadialGradient(canvasElement.width/2, canvasElement.height/2, 25, 320, 200, 150);
+			grad = drawCtx.createRadialGradient(canvasElement.width/2, canvasElement.height/2, canvasElement.width/3, 320, 200, canvasElement.height );
 			grad.addColorStop(0, '#DC143C');                    
 			grad.addColorStop(1, '#FFD700');
 			rightcolor = grad;
 			leftcolor = grad;
 		}
 		if(document.querySelector("#r3").checked){
-			grad = drawCtx.createRadialGradient(canvasElement.width/2, canvasElement.height/2, 25, 320, 200, 150);
+			grad = drawCtx.createRadialGradient(canvasElement.width/2, canvasElement.height/2, canvasElement.width/3, 320, 200, canvasElement.height );
 			grad.addColorStop(0, '#00FF00');                    
 			grad.addColorStop(1, '#FF00FF');
 			rightcolor = grad;
